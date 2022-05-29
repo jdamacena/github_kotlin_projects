@@ -41,7 +41,7 @@ class DetailFragment : Fragment() {
 
         var repository: Repository?
 
-        model.getRepositories().observe(viewLifecycleOwner) { repositoryList ->
+        model.getRepositories(false).observe(viewLifecycleOwner) { repositoryList ->
             repository = repositoryList.toMutableList().first { it.id == model.selectedId }
 
             repository?.apply {

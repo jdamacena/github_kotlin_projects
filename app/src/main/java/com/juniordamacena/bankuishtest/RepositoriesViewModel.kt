@@ -1,6 +1,7 @@
 package com.juniordamacena.bankuishtest
 
 import android.util.Log
+import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,7 +24,15 @@ class RepositoriesViewModel : ViewModel() {
 
     var selectedId: Int = -1
 
-    fun getRepositories(): LiveData<List<Repository>> {
+    fun getRepositories(refresh: Boolean): LiveData<List<Repository>> {
+        if (refresh) {
+            runBlocking {
+                launch {
+                    repositories.value = loadRepositories()
+                }
+            }
+        }
+
         return repositories
     }
 
@@ -34,7 +43,7 @@ class RepositoriesViewModel : ViewModel() {
         var repositories: List<Repository> = listOf()
 
         val response = try {
-            RetrofitInstance.api.getRepositories("language:kotlin", 1)
+            RetrofitInstance.api.getRepositories("language:kotlin", perPage = 100)
         } catch (e: IOException) {
             Log.e(TAG, e.message ?: "IOException")
             return emptyList()
@@ -44,7 +53,9 @@ class RepositoriesViewModel : ViewModel() {
         }
 
         if (response.isSuccessful && response.body() != null) {
-            repositories = response.body()?.items!!
+            repositories = response.body()?.items?.filter {
+                repository -> repository.language.lowercase() == "kotlin"
+            }!!
         } else {
             Log.e(TAG, "Response was not successful")
         }
