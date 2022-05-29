@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bankuish Test</string>
+    <string name="list_fragment_label">Repositórios do Github</string>
+    <string name="detail_fragment_label">Detalhes do Repositório</string>
+    <string name="btn_view_on_github">Ver no Github</string>
+    <string name="menu_refresh">Atualizar</string>
+    <string name="last_updated_text">Ultima atualização: %1$s</string>
+    <string name="num_stars_text">%1$o Estrelas</string>
+    <string name="num_watchers_text">%1$o Observando</string>
+    <string name="num_forks_text">%1$o Forks</string>
+</resources>
