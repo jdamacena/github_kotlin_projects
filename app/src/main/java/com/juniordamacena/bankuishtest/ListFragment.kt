@@ -31,7 +31,7 @@ class FirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
@@ -65,8 +65,6 @@ class FirstFragment : Fragment() {
     private fun adapterOnClick(repository: Repository) {
         model.selectedId = repository.id
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        Snackbar.make(requireView(), "Repository ${repository.name}", Snackbar.LENGTH_LONG)
-//            .setAction("Action", null).show()
     }
 
     override fun onDestroyView() {

@@ -1,15 +1,16 @@
 package com.juniordamacena.bankuishtest
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.juniordamacena.bankuishtest.databinding.ItemRepositoryBinding
 
 /*Created by junio on 28/05/2022.*/
-class RepositoriesAdapter(private val onClick: (Repository) -> Unit) : RecyclerView.Adapter<RepositoriesAdapter.RepositoryViewHolder>() {
+class RepositoriesAdapter(private val onClick: (Repository) -> Unit) :
+    RecyclerView.Adapter<RepositoriesAdapter.RepositoryViewHolder>() {
 
     inner class RepositoryViewHolder(val binding: ItemRepositoryBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -48,10 +49,15 @@ class RepositoriesAdapter(private val onClick: (Repository) -> Unit) : RecyclerV
 
             lblNameRepo.text = repository.name
             lblNameAuthor.text = repository.owner.login
-            imgAuthor.setImageURI(Uri.parse(repository.owner.avatar_url))
             holder.itemView.setOnClickListener {
                 onClick(repository)
             }
+
+            Glide.with(holder.itemView.context)
+                .load(repository.owner.avatar_url)
+                .circleCrop()
+                .placeholder(R.drawable.ic_baseline_photo_24)
+                .into(imgAuthor)
         }
     }
 }
