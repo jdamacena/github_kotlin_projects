@@ -37,6 +37,18 @@
             tools:text="kotlinlang.org" />
 
         <TextView
+            android:id="@+id/lblUpdatedAt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblHomepage"
+            tools:text="Last updated: 05/17/2022" />
+
+        <TextView
             android:id="@+id/lblNumStars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +57,7 @@
             app:drawableStartCompat="@drawable/ic_baseline_star_24"
             app:layout_constraintBottom_toTopOf="@+id/lblNumWatchers"
             app:layout_constraintStart_toStartOf="@+id/lblNumWatchers"
-            app:layout_constraintTop_toBottomOf="@+id/lblHomepage"
+            app:layout_constraintTop_toBottomOf="@+id/lblUpdatedAt"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="777 Stars" />
 

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.juniordamacena.bankuishtest.ListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/list_fragment_label"
         tools:layout="@layout/fragment_list">
 
         <action
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.juniordamacena.bankuishtest.DetailFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/detail_fragment_label"
         tools:layout="@layout/fragment_detail">
 
         <action

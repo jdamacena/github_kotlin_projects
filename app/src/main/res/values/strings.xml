@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">Bankuish Test</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Github Repositories</string>
-    <string name="second_fragment_label">Repository Details</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="list_fragment_label">Github Repositories</string>
+    <string name="detail_fragment_label">Repository Details</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="btn_view_on_github">View on Github</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="last_updated_text">Last updated: %1$s</string>
+    <string name="num_stars_text">%1$o Stars</string>
+    <string name="num_watchers_text">%1$o Watchers</string>
+    <string name="num_forks_text">%1$o Forks</string>
 </resources>

@@ -11,6 +11,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.juniordamacena.bankuishtest.databinding.FragmentDetailBinding
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 
 /**
@@ -52,12 +54,20 @@ class DetailFragment : Fragment() {
 
                 binding.lblDescription.text = description
 
+                try {
+                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                    val date = format.parse(updated_at)
+                    binding.lblUpdatedAt.text = getString(R.string.last_updated_text, date?.toLocaleString() ?: updated_at)
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+
                 binding.lblHomepage.text = homepage
                 binding.lblHomepage.isVisible = !homepage.isNullOrBlank()
 
-                binding.lblNumStars.text = "$stargazers_count Stars"
-                binding.lblNumWatchers.text = "$watchers_count Watchers"
-                binding.lblNumForks.text = "$forks_count Forks"
+                binding.lblNumStars.text = getString(R.string.num_stars_text, stargazers_count)
+                binding.lblNumWatchers.text = getString(R.string.num_watchers_text, watchers_count)
+                binding.lblNumForks.text = getString(R.string.num_forks_text, forks_count)
 
                 binding.btnOpenGithub.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(html_url))
