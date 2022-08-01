@@ -1,4 +1,4 @@
-package com.juniordamacena.bankuishtest
+package com.juniordamacena.bankuishtest.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juniordamacena.bankuishtest.R
+import com.juniordamacena.bankuishtest.Repository
+import com.juniordamacena.bankuishtest.adapters.RepositoriesAdapter
 import com.juniordamacena.bankuishtest.databinding.FragmentListBinding
+import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
 
 const val TAG = "FirstFragment"
 

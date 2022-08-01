@@ -1,4 +1,4 @@
-package com.juniordamacena.bankuishtest
+package com.juniordamacena.bankuishtest.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.juniordamacena.bankuishtest.R
+import com.juniordamacena.bankuishtest.Repository
 import com.juniordamacena.bankuishtest.databinding.ItemRepositoryBinding
 
 /*Created by junio on 28/05/2022.*/

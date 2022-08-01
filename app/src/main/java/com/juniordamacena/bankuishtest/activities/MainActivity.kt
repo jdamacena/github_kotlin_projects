@@ -1,4 +1,4 @@
-package com.juniordamacena.bankuishtest
+package com.juniordamacena.bankuishtest.activities
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.juniordamacena.bankuishtest.R
+import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
 import com.juniordamacena.bankuishtest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
