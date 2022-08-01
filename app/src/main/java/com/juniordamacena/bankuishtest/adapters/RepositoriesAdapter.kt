@@ -33,8 +33,9 @@ class RepositoriesAdapter(
 
             if (repository == null) return
 
-            lblNameRepo.text = repository.name
-            lblNameAuthor.text = repository.owner.login
+            lblNameRepo.text = repository.full_name
+            lblDescription.text = repository.description
+
             holder.itemView.setOnClickListener {
                 onClick(repository)
             }
