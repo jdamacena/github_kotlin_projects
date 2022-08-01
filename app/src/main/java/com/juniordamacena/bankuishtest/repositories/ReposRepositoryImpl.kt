@@ -28,7 +28,7 @@ class ReposRepositoryImpl(
         if (response.isSuccessful && response.body() != null) {
             repositories = response.body()?.items?.filter { repository ->
                 repository.language.lowercase() == "kotlin"
-            }!!
+            } ?: emptyList()
         } else {
             Log.e(TAG, "Response was not successful")
         }

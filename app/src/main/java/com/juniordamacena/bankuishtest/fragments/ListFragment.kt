@@ -2,14 +2,16 @@ package com.juniordamacena.bankuishtest.fragments
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juniordamacena.bankuishtest.R
-import com.juniordamacena.bankuishtest.models.Repository
 import com.juniordamacena.bankuishtest.adapters.RepositoriesAdapter
 import com.juniordamacena.bankuishtest.databinding.FragmentListBinding
+import com.juniordamacena.bankuishtest.models.Repository
 import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
 
 const val TAG = "FirstFragment"
@@ -54,6 +56,16 @@ class ListFragment : Fragment() {
         binding.swipeRefresh.setOnRefreshListener {
             refreshData()
         }
+
+        repositoriesAdapter.addLoadStateListener { loadState ->
+            val isLoading = loadState.refresh is LoadState.Loading
+
+            if (!binding.swipeRefresh.isRefreshing) {
+                binding.progressBar.isVisible = isLoading
+            } else if (!isLoading) {
+                binding.swipeRefresh.isRefreshing = false
+            }
+        }
     }
 
     /* Opens the details screen when RecyclerView item is clicked. */
@@ -63,7 +75,7 @@ class ListFragment : Fragment() {
     }
 
     private fun refreshData() {
-        // TODO: Refresh data
+        viewModel.invalidatePagingSource()
     }
 
     override fun onDestroyView() {

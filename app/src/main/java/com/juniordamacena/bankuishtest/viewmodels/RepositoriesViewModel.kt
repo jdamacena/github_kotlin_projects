@@ -19,8 +19,15 @@ import org.koin.core.component.inject
 class RepositoriesViewModel : ViewModel(), KoinComponent {
     private val reposRepository: ReposRepository by inject()
 
+    private var reposPagingSource: ReposPagingSource? = null
+
+    private fun pagingSourceFactory(): ReposPagingSource {
+        reposPagingSource = ReposPagingSource(reposRepository)
+        return reposPagingSource!!
+    }
+
     val pagedData = Pager(PagingConfig(pageSize = 20, initialLoadSize = 80)) {
-        ReposPagingSource(reposRepository)
+        pagingSourceFactory()
     }.liveData.cachedIn(viewModelScope)
 
     private var _selectedItem: MutableLiveData<Repository> = MutableLiveData()
@@ -30,6 +37,13 @@ class RepositoriesViewModel : ViewModel(), KoinComponent {
 
     fun setSelectedItem(value: Repository) {
         _selectedItem.value = value
+    }
+
+    /**
+     * Invalidates the [ReposPagingSource] so that it can start loading again, refreshing its data
+     */
+    fun invalidatePagingSource() {
+        reposPagingSource?.invalidate()
     }
 
     object RepositoryComparator : DiffUtil.ItemCallback<Repository>() {
