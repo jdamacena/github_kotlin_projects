@@ -1,7 +1,7 @@
 package com.juniordamacena.bankuishtest.repositories
 
 import android.util.Log
-import com.juniordamacena.bankuishtest.Repository
+import com.juniordamacena.bankuishtest.models.Repository
 import com.juniordamacena.bankuishtest.fragments.TAG
 import com.juniordamacena.bankuishtest.services.GithubApi
 import retrofit2.HttpException

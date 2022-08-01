@@ -1,6 +1,6 @@
 package com.juniordamacena.bankuishtest.services
 
-import com.juniordamacena.bankuishtest.RepositoryResponse
+import com.juniordamacena.bankuishtest.models.RepositoryResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

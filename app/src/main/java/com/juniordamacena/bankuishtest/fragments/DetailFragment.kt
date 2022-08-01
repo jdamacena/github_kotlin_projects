@@ -11,7 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.juniordamacena.bankuishtest.R
-import com.juniordamacena.bankuishtest.Repository
+import com.juniordamacena.bankuishtest.models.Repository
 import com.juniordamacena.bankuishtest.databinding.FragmentDetailBinding
 import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
 import java.text.ParseException
