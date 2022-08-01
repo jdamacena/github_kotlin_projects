@@ -40,17 +40,15 @@ class ListFragment : Fragment() {
         val repositoriesAdapter: RepositoriesAdapter
 
         binding.rvRepos.apply {
-            repositoriesAdapter = RepositoriesAdapter { repository: Repository ->
+            repositoriesAdapter = RepositoriesAdapter(diffCallback = RepositoriesViewModel.RepositoryComparator, onClick = { repository: Repository ->
                 adapterOnClick(repository)
-            }
+            })
             adapter = repositoriesAdapter
             layoutManager = LinearLayoutManager(context)
         }
 
-        viewModel.loadRepositories()
-
-        viewModel.repositories.observe(viewLifecycleOwner) { repositoryList ->
-            repositoriesAdapter.repositories = repositoryList
+        viewModel.pagedData.observe(viewLifecycleOwner) { pagingData ->
+            repositoriesAdapter.submitData(lifecycle, pagingData)
         }
 
         binding.swipeRefresh.setOnRefreshListener {
@@ -60,7 +58,7 @@ class ListFragment : Fragment() {
 
     /* Opens the details screen when RecyclerView item is clicked. */
     private fun adapterOnClick(repository: Repository) {
-        viewModel.selectedId = repository.id
+        viewModel.setSelectedItem(repository)
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 

@@ -12,11 +12,11 @@ class ReposRepositoryImpl(
     private val githubApi: GithubApi,
 ) : ReposRepository {
 
-    override suspend fun getRepositories(): List<Repository> {
+    override suspend fun getRepositories(pageNumber: Int, perPage: Int): List<Repository> {
         var repositories: List<Repository> = listOf()
 
         val response = try {
-            githubApi.getRepositories("language:kotlin", perPage = 100)
+            githubApi.getRepositories("language:kotlin", page = pageNumber, perPage = perPage)
         } catch (e: IOException) {
             Log.e(TAG, e.message ?: "IOException")
             return emptyList()

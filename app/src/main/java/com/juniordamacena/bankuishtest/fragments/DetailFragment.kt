@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.juniordamacena.bankuishtest.R
-import com.juniordamacena.bankuishtest.models.Repository
 import com.juniordamacena.bankuishtest.databinding.FragmentDetailBinding
 import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
 import java.text.ParseException
@@ -39,13 +38,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var repository: Repository?
-
-        viewModel.loadRepositories()
-
-        viewModel.repositories.observe(viewLifecycleOwner) { repositoryList ->
-            repository = repositoryList.first { it.id == viewModel.selectedId }
-
+        viewModel.selectedItem.observe(viewLifecycleOwner) { repository ->
             repository?.apply {
                 (activity as AppCompatActivity).supportActionBar?.apply {
                     title = name
