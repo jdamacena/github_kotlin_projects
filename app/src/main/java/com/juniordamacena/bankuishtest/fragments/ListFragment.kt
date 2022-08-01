@@ -71,7 +71,9 @@ class ListFragment : Fragment() {
     /* Opens the details screen when RecyclerView item is clicked. */
     private fun adapterOnClick(repository: Repository) {
         viewModel.setSelectedItem(repository)
-        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+
+        val action = ListFragmentDirections.actionListFragmentToDetailFragment()
+        findNavController().navigate(action)
     }
 
     private fun refreshData() {
