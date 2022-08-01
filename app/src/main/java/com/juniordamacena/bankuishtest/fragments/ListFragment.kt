@@ -14,9 +14,6 @@ import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
 
 const val TAG = "FirstFragment"
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
@@ -25,15 +22,13 @@ class ListFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var repositoriesAdapter: RepositoriesAdapter
-
-    private val model: RepositoriesViewModel by activityViewModels()
+    private val viewModel: RepositoriesViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
-
         _binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,39 +37,35 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        setupRecyclerView()
+        val repositoriesAdapter: RepositoriesAdapter
 
-        loadData()
+        binding.rvRepos.apply {
+            repositoriesAdapter = RepositoriesAdapter { repository: Repository ->
+                adapterOnClick(repository)
+            }
+            adapter = repositoriesAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        viewModel.loadRepositories()
+
+        viewModel.repositories.observe(viewLifecycleOwner) { repositoryList ->
+            repositoriesAdapter.repositories = repositoryList
+        }
 
         binding.swipeRefresh.setOnRefreshListener {
-            loadData(true)
+            refreshData()
         }
-    }
-
-    private fun loadData(refresh: Boolean = false) {
-        binding.swipeRefresh.isRefreshing = true
-
-        model.getRepositories(refresh).observe(viewLifecycleOwner) { repositoryList ->
-            repositoriesAdapter.repositories = repositoryList
-            binding.swipeRefresh.isRefreshing = false
-        }
-    }
-
-    /**
-     * Setting up the recycler view
-     */
-    private fun setupRecyclerView() = binding.rvRepos.apply {
-        repositoriesAdapter = RepositoriesAdapter { repository: Repository ->
-            adapterOnClick(repository)
-        }
-        adapter = repositoriesAdapter
-        layoutManager = LinearLayoutManager(context)
     }
 
     /* Opens the details screen when RecyclerView item is clicked. */
     private fun adapterOnClick(repository: Repository) {
-        model.selectedId = repository.id
+        viewModel.selectedId = repository.id
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+    }
+
+    private fun refreshData() {
+        // TODO: Refresh data
     }
 
     override fun onDestroyView() {
@@ -93,7 +84,7 @@ class ListFragment : Fragment() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.menu_refresh -> {
-                loadData(true)
+                refreshData()
 
                 return true
             }

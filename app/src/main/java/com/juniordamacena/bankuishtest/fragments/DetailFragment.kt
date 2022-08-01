@@ -17,10 +17,6 @@ import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
@@ -29,16 +25,15 @@ class DetailFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val model: RepositoriesViewModel by activityViewModels()
+    private val viewModel: RepositoriesViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,8 +41,10 @@ class DetailFragment : Fragment() {
 
         var repository: Repository?
 
-        model.getRepositories(false).observe(viewLifecycleOwner) { repositoryList ->
-            repository = repositoryList.toMutableList().first { it.id == model.selectedId }
+        viewModel.loadRepositories()
+
+        viewModel.repositories.observe(viewLifecycleOwner) { repositoryList ->
+            repository = repositoryList.first { it.id == viewModel.selectedId }
 
             repository?.apply {
                 (activity as AppCompatActivity).supportActionBar?.apply {
@@ -60,7 +57,8 @@ class DetailFragment : Fragment() {
                 try {
                     val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
                     val date = format.parse(updated_at)
-                    binding.lblUpdatedAt.text = getString(R.string.last_updated_text, date?.toLocaleString() ?: updated_at)
+                    binding.lblUpdatedAt.text =
+                        getString(R.string.last_updated_text, date?.toLocaleString() ?: updated_at)
                 } catch (e: ParseException) {
                     e.printStackTrace()
                 }

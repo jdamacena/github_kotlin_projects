@@ -14,23 +14,16 @@ import org.koin.core.component.inject
 class RepositoriesViewModel : ViewModel(), KoinComponent {
     private val reposRepository: ReposRepository by inject()
 
-    private val repositories: MutableLiveData<List<Repository>> by lazy {
-        MutableLiveData<List<Repository>>().also {
-            viewModelScope.launch {
-                it.value = reposRepository.getRepositories()
-            }
-        }
-    }
+    private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()
+
+    val repositories: LiveData<List<Repository>>
+        get() = _repositories
 
     var selectedId: Int = -1
 
-    fun getRepositories(refresh: Boolean): LiveData<List<Repository>> {
-        if (refresh) {
-            viewModelScope.launch {
-                repositories.value = reposRepository.getRepositories()
-            }
+    fun loadRepositories() {
+        viewModelScope.launch {
+            _repositories.value = reposRepository.getRepositories()
         }
-
-        return repositories
     }
 }
