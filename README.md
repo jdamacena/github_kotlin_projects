@@ -2,7 +2,7 @@
 
 This is an app that lists Kotlin Related Github repositories.
 
-It's been created as part of a test, the tech stack Includes **Kotlin**, **Retrofit**, **ViewModel**, **ViewBinding** and the use of Android Jetpack's **Navigation component**. It also include Swipe to Refresh.
+It's been created with the goal of learning, the tech stack Includes **Kotlin**, **Retrofit** for APIs calls, the **MVVM** pattern, **ViewBinding** and **LiveData** and the use of Android Jetpack's **Navigation component**. It also implements Swipe to Refresh.
 
 
 ### Screenshots
@@ -14,6 +14,6 @@ It's been created as part of a test, the tech stack Includes **Kotlin**, **Retro
 
 ### TODO list (missing features)
 
-- Dependency Injection with Koin or Dagger;
+- ~Dependency Injection with Koin or Dagger;~ Now using Koin!
 - Unit/Instrumented tests;
 - Pagination.
