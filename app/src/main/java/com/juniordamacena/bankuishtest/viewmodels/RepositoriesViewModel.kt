@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.juniordamacena.bankuishtest.models.Repository
 import com.juniordamacena.bankuishtest.repositories.ReposPagingSource
 import com.juniordamacena.bankuishtest.repositories.ReposRepository
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -44,6 +45,18 @@ class RepositoriesViewModel : ViewModel(), KoinComponent {
      */
     fun invalidatePagingSource() {
         reposPagingSource?.invalidate()
+    }
+
+    private var _readMeText: MutableLiveData<String> = MutableLiveData()
+
+    val readMeText: LiveData<String>
+        get() = _readMeText
+
+    fun loadReadMeForRepository(repository: Repository) {
+        viewModelScope.launch {
+            _readMeText.value = ""
+            _readMeText.value = reposRepository.loadReadMeForRepository(repository)
+        }
     }
 
     object RepositoryComparator : DiffUtil.ItemCallback<Repository>() {

@@ -38,8 +38,15 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.readMeText.observe(viewLifecycleOwner) { readMeText ->
+            binding.lblReadme.text = readMeText
+        }
+
         viewModel.selectedItem.observe(viewLifecycleOwner) { repository ->
             repository?.apply {
+
+                viewModel.loadReadMeForRepository(this)
+
                 (activity as AppCompatActivity).supportActionBar?.apply {
                     title = name
                     subtitle = full_name
