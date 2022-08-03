@@ -10,9 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.juniordamacena.bankuishtest.R
 import com.juniordamacena.bankuishtest.databinding.FragmentDetailBinding
 import com.juniordamacena.bankuishtest.viewmodels.RepositoriesViewModel
+import io.noties.markwon.Markwon
+import io.noties.markwon.image.glide.GlideImagesPlugin
+import io.noties.markwon.linkify.LinkifyPlugin
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
@@ -39,7 +43,15 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.readMeText.observe(viewLifecycleOwner) { readMeText ->
-            binding.lblReadme.text = readMeText
+            // obtain an instance of Markwon
+            val markwon: Markwon = Markwon
+                .builder(requireContext())
+                .usePlugin(GlideImagesPlugin.create(Glide.with(requireContext())))
+                .usePlugin(LinkifyPlugin.create())
+                .build()
+
+            // set markdown
+            markwon.setMarkdown(binding.lblReadme, readMeText)
         }
 
         viewModel.selectedItem.observe(viewLifecycleOwner) { repository ->

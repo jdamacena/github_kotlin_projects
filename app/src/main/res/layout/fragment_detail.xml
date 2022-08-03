@@ -94,15 +94,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblNumForks" />
 
-        <TextView
-            android:id="@+id/lblReadme"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnOpenGithub"
-            tools:text="readme.md" />
+            app:layout_constraintTop_toBottomOf="@id/btnOpenGithub">
 
+            <TextView
+                android:id="@+id/lblReadme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:text="readme.md" />
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

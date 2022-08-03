@@ -82,4 +82,10 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation "androidx.cardview:cardview:1.0.0"
+//
+//    // Markdown Interpreter
+    def markwon_version = '4.6.2'
+    implementation "io.noties.markwon:core:$markwon_version"
+    implementation "io.noties.markwon:image-glide:$markwon_version"
+    implementation "io.noties.markwon:linkify:$markwon_version"
 }
