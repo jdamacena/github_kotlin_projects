@@ -1,112 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragments.DetailFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        tools:context=".fragments.DetailFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/lblDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="The Kotlin Programming Language." />
-
-        <TextView
-            android:id="@+id/lblHomepage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:gravity="center_vertical|start"
-            android:minHeight="48dp"
-            android:textColor="#00838F"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblDescription"
-            tools:text="kotlinlang.org" />
-
-        <TextView
-            android:id="@+id/lblUpdatedAt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblHomepage"
-            tools:text="Last updated: 05/17/2022" />
-
-        <TextView
-            android:id="@+id/lblNumStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
-            android:gravity="center_vertical|start"
-            app:drawableStartCompat="@drawable/ic_baseline_star_24"
-            app:layout_constraintBottom_toTopOf="@+id/lblNumWatchers"
-            app:layout_constraintStart_toStartOf="@+id/lblNumWatchers"
-            app:layout_constraintTop_toBottomOf="@+id/lblUpdatedAt"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="777 Stars" />
-
-        <TextView
-            android:id="@+id/lblNumWatchers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
-            android:gravity="center_vertical|start"
-            app:drawableStartCompat="@drawable/ic_baseline_visibility_24"
-            app:layout_constraintBottom_toTopOf="@+id/lblNumForks"
-            app:layout_constraintStart_toStartOf="@+id/lblNumForks"
-            app:layout_constraintTop_toBottomOf="@+id/lblNumStars"
-            tools:text="888 Watchers" />
-
-        <TextView
-            android:id="@+id/lblNumForks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
-            android:gravity="center_vertical|start"
-            app:drawableStartCompat="@drawable/ic_baseline_alt_route_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblNumWatchers"
-            tools:text="999 Forks" />
-
-        <Button
-            android:id="@+id/btnOpenGithub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/btn_view_on_github"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblNumForks" />
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnOpenGithub">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="@dimen/bottom_sheet_peek_distance">
 
             <TextView
                 android:id="@+id/lblReadme"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 tools:text="readme.md" />
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/bottomSheet"
+        layout="@layout/modal_bottom_sheet_repo_info" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

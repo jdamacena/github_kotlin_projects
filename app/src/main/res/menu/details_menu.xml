@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_info"
+        android:title="@string/menu_info"
+        android:icon="@drawable/ic_baseline_info_24"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_open_github"
+        android:icon="@drawable/ic_baseline_open_in_new_24"
+        android:title="@string/view_on_github"
+        app:showAsAction="ifRoom" />
+</menu>
